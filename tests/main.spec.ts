@@ -37,80 +37,80 @@ test("Login", async ({ request }) => {
 
 
 /* ------------------------ Plugin ------------------------ */
-// test("Plugin List, Create & Update", async ({ request }) => {
+test("Plugin List, Create & Update", async ({ request }) => {
 
-//     const plugin = new PluginPage(request);
+    const plugin = new PluginPage(request);
 
-//     // Plugin List
-//     await plugin.plugin_list();
+    // Plugin List
+    await plugin.plugin_list();
 
-//     const free_plugin_name: string = faker.lorem.words(2); //Auto generated plugin name
-//     const pro_plugin_name: string = faker.lorem.words(2); //Auto generated plugin name
-//     //const platform_name: string = "woocom";
-
-
-//     // Free Plugin Create
-//     plugins_slug.push(
-//         await plugin.free_plugin_create(free_plugin_name)
-//     );
+    const free_plugin_name: string = faker.lorem.words(2); //Auto generated plugin name
+    const pro_plugin_name: string = faker.lorem.words(2); //Auto generated plugin name
+    //const platform_name: string = "woocom";
 
 
-//     // Pro Plugin Create
-//     plugins_slug.push(
-//         await plugin.pro_plugin_create(pro_plugin_name)
-//     );
+    // Free Plugin Create
+    plugins_slug.push(
+        await plugin.free_plugin_create(free_plugin_name)
+    );
 
 
-//     // Plugin Update
-//     const updateable_plugin_slug: string = ""; //Any existing plugin slug
-//     await plugin.plugin_update(updateable_plugin_slug);
+    // Pro Plugin Create
+    plugins_slug.push(
+        await plugin.pro_plugin_create(pro_plugin_name)
+    );
 
-//     /* All Plugin Update */
-//     // for (let i: number = 0; i < plugins_slug.length; i++) {
-//     //     await plugin.plugin_update(plugins_slug[i]);
-//     // }
 
-// })
+    // Plugin Update
+    const updateable_plugin_slug: string = ""; //Any existing plugin slug
+    await plugin.plugin_update(updateable_plugin_slug);
+
+    /* All Plugin Update */
+    // for (let i: number = 0; i < plugins_slug.length; i++) {
+    //     await plugin.plugin_update(plugins_slug[i]);
+    // }
+
+})
 
 
 /* ------------------------ Theme ------------------------ */
-// test("Theme List, Create & Update", async ({ request }) => {
+test("Theme List, Create & Update", async ({ request }) => {
 
-//     const theme = new ThemePage(request);
+    const theme = new ThemePage(request);
 
-//     // Plugin List
-//     await theme.theme_list();
+    // Plugin List
+    await theme.theme_list();
 
-//     const free_theme_name: string = faker.lorem.words(2); //Auto generated theme name
-//     const pro_theme_name: string = faker.lorem.words(2); //Auto generated theme name
-//     const website_url: string = "https://modernsound.s3-tastewp.com"; //Website URL through which this theme will be sold
-//     const product_name: string = "Test Product N2"; //Product Name which will be connected with this theme
-//     const platform_name: string = "edd";
+    const free_theme_name: string = faker.lorem.words(2); //Auto generated theme name
+    const pro_theme_name: string = faker.lorem.words(2); //Auto generated theme name
+    const website_url: string = "https://modernsound.s3-tastewp.com"; //Website URL through which this theme will be sold
+    const product_name: string = "Test Product N2"; //Product Name which will be connected with this theme
+    const platform_name: string = "edd";
 
-//     // Free Theme Create
-//     themes_slug.push(
-//         await theme.free_theme_create(free_theme_name)
-//     );
-
-
-//     // Pro Theme Create
-//     themes_slug.push(
-//         await theme.pro_theme_create(pro_theme_name)
-//     );
+    // Free Theme Create
+    themes_slug.push(
+        await theme.free_theme_create(free_theme_name)
+    );
 
 
-//     // Theme Update
-//     const updateable_theme_slug: string = ""; //Any existing theme slug
-//     const new_theme_name: string = "";
+    // Pro Theme Create
+    themes_slug.push(
+        await theme.pro_theme_create(pro_theme_name)
+    );
 
-//     await theme.theme_update(updateable_theme_slug, new_theme_name);
 
-//     /* All Theme Update */
-//     // for (let i: number = 0; i < themes_slug.length; i++) {
-//     //     await theme.theme_update(themes_slug[i], faker.lorem.words(2));
-//     // }
+    // Theme Update
+    const updateable_theme_slug: string = ""; //Any existing theme slug
+    const new_theme_name: string = "";
 
-// })
+    await theme.theme_update(updateable_theme_slug, new_theme_name);
+
+    /* All Theme Update */
+    // for (let i: number = 0; i < themes_slug.length; i++) {
+    //     await theme.theme_update(themes_slug[i], faker.lorem.words(2));
+    // }
+
+})
 
 
 /* ------------------------ Bundle ------------------------ */
