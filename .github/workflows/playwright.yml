@@ -24,12 +24,6 @@ jobs:
         CI: true
         USER_NAME: ${{ secrets.USER_NAME }}
         PASSWORD: ${{ secrets.PASSWORD }}
-    - uses: actions/upload-artifact@v3
-      if: always()
-      with:
-        name: playwright-report
-        path: playwright-report/
-        retention-days: 30
     - name: Save Screenshots
         uses: actions/upload-artifact@v3
         # if: always()
