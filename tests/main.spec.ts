@@ -69,6 +69,10 @@ test("Plugin List, Create & Update", async ({ request }) => {
     // for (let i: number = 0; i < plugins_slug.length; i++) {
     //     await plugin.plugin_update(plugins_slug[i]);
     // }
+    /* All Plugin Update */
+    // for (let i: number = 0; i < plugins_slug.length; i++) {
+    //     await plugin.plugin_update(plugins_slug[i]);
+    // }
 
 })
 
