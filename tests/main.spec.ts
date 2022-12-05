@@ -1,7 +1,6 @@
 import { test } from "@playwright/test";
 import * as data from "../utils/data";
 import * as faker from 'faker';
-import * as fs from "fs";
 
 import { LoginPage } from "../pages/login";
 import { DashboardPage } from "../pages/dashboard";
@@ -150,8 +149,6 @@ test("Bundle Create & Update", async ({ request }) => {
     const bundle_products: string[] = [];
     const platform_name: string = "edd";
 
-    bundle_products.push();
-
     await bundle.bundle_create(bundle_name, products_id);
 
     /* -------- Bundle Update -------- */
@@ -233,4 +230,3 @@ test("Prodcut Delete", async ({ request }) => {
 })
 
 auth = "";
-console.log(`${auth}weew`);
