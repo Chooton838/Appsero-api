@@ -15,7 +15,7 @@ export class ProductPage {
 
   async product_list() {
 
-    let products_prop: string[] = [];
+    let products_prop: string[][] = [];
 
     const product_list = await this.request.get(`${base_url}/v1/projects`, {
       headers: {
@@ -26,14 +26,29 @@ export class ProductPage {
     expect(product_list.status()).toBeTruthy();
 
     const product_list_response = await product_list.json();
-    console.log();
-    for (let i = 0; i < (product_list_response.data).length; i++) {
-      products_prop.push(product_list_response.data[i].slug);
-      products_prop.push(product_list_response.data[i].type);
-    }
-    const products = [products_prop]
 
-    return products;
+    for (let i = 0; i < (product_list_response.data).length; i++) {
+      products_prop.push([product_list_response.data[i].slug, product_list_response.data[i].type]);
+    }
+
+    return products_prop;
+
+  };
+
+
+  async product_details(product_type, product_slug) {
+
+    const product_details = await this.request.get(`${base_url}/v1/${product_type}/${product_slug}`, {
+      headers: {
+        'authorization': auth,
+      }
+    });
+
+    expect(product_details.status()).toBeTruthy();
+
+    const product_details_response = await product_details.json();
+
+    return product_details_response.data.default_variation.project_id;
 
   };
 
@@ -48,8 +63,8 @@ export class ProductPage {
 
     expect(product_delete.status()).toBeTruthy();
 
-    const product_delete_response = await product_delete.json();
-    console.log(product_delete_response);
+    // const product_delete_response = await product_delete.json();
+    // console.log(product_delete_response);
 
   };
 
@@ -84,7 +99,21 @@ export class ProductPage {
   }
 
 
-  async release_create(product_name) {
+  async release_create(product_slug, product_type) {
+
+    const product_delete = await this.request.post(`${base_url}/v1/${product_type}/${product_slug}/releases`, {
+      headers: {
+        'authorization': auth,
+      },
+      data: {
+        "change_log": "IR",
+        "file_location": { product_slug: {} },
+        "release_date": "2022-12-06",
+        "version": "0.0.1"
+      }
+    });
+
+    expect(product_delete.status()).toBeTruthy();
 
   };
 

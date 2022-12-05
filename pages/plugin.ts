@@ -52,9 +52,6 @@ export class PluginPage {
 
     expect(free_plugin_create.status()).toBeTruthy();
 
-    const free_plugin_response = await free_plugin_create.json();
-    console.log(free_plugin_response);
-
     return ((plugin_name.split(" ")).join("_")).toLowerCase();
 
   };
@@ -82,9 +79,6 @@ export class PluginPage {
     });
 
     expect(pro_plugin_create.status()).toBeTruthy();
-
-    const pro_plugin_response = await pro_plugin_create.json();
-    console.log(pro_plugin_response);
 
     return ((plugin_name.split(" ")).join("_")).toLowerCase();
 

@@ -48,9 +48,6 @@ export class ThemePage {
 
     expect(free_theme_create.status()).toBeTruthy();
 
-    const free_theme_response = await free_theme_create.json();
-    console.log(free_theme_response);
-
     return ((theme_name.split(" ")).join("_")).toLowerCase();
 
   };
@@ -74,9 +71,6 @@ export class ThemePage {
     });
 
     expect(pro_theme_create.status()).toBeTruthy();
-
-    const pro_theme_response = await pro_theme_create.json();
-    console.log(pro_theme_response);
 
     return ((theme_name.split(" ")).join("_")).toLowerCase();
 

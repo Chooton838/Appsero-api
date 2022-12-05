@@ -19,6 +19,8 @@ export class LoginPage {
       }
     });
 
+    expect(login.status()).toBeTruthy();
+
     const login_response = await login.json();
 
     return login_response.api_token;
