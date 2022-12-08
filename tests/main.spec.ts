@@ -27,9 +27,9 @@ test("Login", async ({ request }) => {
 
 
 /* ------------------------ Getting Dashboard Details ------------------------ */
-// test("Getting Dashboard Overview Details", async ({ page }) => {
+// test("Getting Dashboard Overview Details", async ({ request }) => {
 
-//     const dashboard = new DashboardPage(page);
+//     const dashboard = new DashboardPage(request);
 //     await dashboard.overview_details();
 
 // });
@@ -77,156 +77,156 @@ test("Plugin List, Create & Update", async ({ request }) => {
 
 
 /* ------------------------ Theme ------------------------ */
-test("Theme List, Create & Update", async ({ request }) => {
+// test("Theme List, Create & Update", async ({ request }) => {
 
-    const theme = new ThemePage(request);
+//     const theme = new ThemePage(request);
 
-    // Plugin List
-    // await theme.theme_list();
+//     // Plugin List
+//     // await theme.theme_list();
 
-    const free_theme_name: string = faker.lorem.words(2); //Auto generated theme name
-    const pro_theme_name: string = faker.lorem.words(2); //Auto generated theme name
-    const website_url: string = "https://modernsound.s3-tastewp.com"; //Website URL through which this theme will be sold
-    const product_name: string = "Test Product N2"; //Product Name which will be connected with this theme
-    const platform_name: string = "edd";
+//     const free_theme_name: string = faker.lorem.words(2); //Auto generated theme name
+//     const pro_theme_name: string = faker.lorem.words(2); //Auto generated theme name
+//     const website_url: string = "https://modernsound.s3-tastewp.com"; //Website URL through which this theme will be sold
+//     const product_name: string = "Test Product N2"; //Product Name which will be connected with this theme
+//     const platform_name: string = "edd";
 
-    // Free Theme Create
-    themes_slug.push(
-        await theme.free_theme_create(free_theme_name)
-    );
-
-
-    // Pro Theme Create
-    themes_slug.push(
-        await theme.pro_theme_create(pro_theme_name)
-    );
+//     // Free Theme Create
+//     themes_slug.push(
+//         await theme.free_theme_create(free_theme_name)
+//     );
 
 
-    // Theme Update
-    const updateable_theme_slug: string = ""; //Any existing theme slug
-    const new_theme_name: string = "";
+//     // Pro Theme Create
+//     themes_slug.push(
+//         await theme.pro_theme_create(pro_theme_name)
+//     );
 
-    // await theme.theme_update(updateable_theme_slug, new_theme_name);
 
-    /* All Theme Update */
-    // for (let i: number = 0; i < themes_slug.length; i++) {
-    //     await theme.theme_update(themes_slug[i], faker.lorem.words(2));
-    // }
+//     // Theme Update
+//     const updateable_theme_slug: string = ""; //Any existing theme slug
+//     const new_theme_name: string = "";
 
-})
+//     // await theme.theme_update(updateable_theme_slug, new_theme_name);
+
+//     /* All Theme Update */
+//     // for (let i: number = 0; i < themes_slug.length; i++) {
+//     //     await theme.theme_update(themes_slug[i], faker.lorem.words(2));
+//     // }
+
+// })
 
 
 const products_id: string[] = [];
 
-/* ------------------------ Products ID ------------------------ */
-test("Products id", async ({ request }) => {
+// /* ------------------------ Products ID ------------------------ */
+// test("Products id", async ({ request }) => {
 
-    const product = new ProductPage(request);
+//     const product = new ProductPage(request);
 
-    const products_slug = plugins_slug.concat(themes_slug);
+//     const products_slug = plugins_slug.concat(themes_slug);
 
-    products_id.push(
-        await product.product_details('plugins', products_slug[1])
-    );
-    products_id.push(
-        await product.product_details('themes', products_slug[3])
-    );
+//     products_id.push(
+//         await product.product_details('plugins', products_slug[1])
+//     );
+//     products_id.push(
+//         await product.product_details('themes', products_slug[3])
+//     );
 
-    // products_id.push(await product.product_details('themes', 'aperiam_saepe'));
+//     // products_id.push(await product.product_details('themes', 'aperiam_saepe'));
 
-})
+// })
 
 
 /* ------------------------ Bundle ------------------------ */
-test("Bundle Create & Update", async ({ request }) => {
+// test("Bundle Create & Update", async ({ request }) => {
 
-    const bundle = new BundlePage(request);
+//     const bundle = new BundlePage(request);
 
-    //Could be any valid bundle name
-    const bundle_name: string = faker.lorem.words(2); //Auto generated bundle name
-    const website_url: string = "https://modernsound.s3-tastewp.com"; //Website URL through which this bundle will be sold
-    const product_name: string = "Test Product N3"; //Product Name which will be connected with this bundle
-    const bundle_products: string[] = [];
-    const platform_name: string = "edd";
+//     //Could be any valid bundle name
+//     const bundle_name: string = faker.lorem.words(2); //Auto generated bundle name
+//     const website_url: string = "https://modernsound.s3-tastewp.com"; //Website URL through which this bundle will be sold
+//     const product_name: string = "Test Product N3"; //Product Name which will be connected with this bundle
+//     const bundle_products: string[] = [];
+//     const platform_name: string = "edd";
 
-    await bundle.bundle_create(bundle_name, products_id);
+//     await bundle.bundle_create(bundle_name, products_id);
 
-    /* -------- Bundle Update -------- */
-    /**
-    * updateable_bundle_name = Any valid existing bundle name and this bundle will be updated
-    * new_bundle_name = New Bundle Name
-    */
+//     /* -------- Bundle Update -------- */
+//     /**
+//     * updateable_bundle_name = Any valid existing bundle name and this bundle will be updated
+//     * new_bundle_name = New Bundle Name
+//     */
 
-    // let updateable_bundle_name: string = ""; //Any valid updateable bundle name
-    // let new_bundle_name: string = ""; //Any valid bundle name
+//     // let updateable_bundle_name: string = ""; //Any valid updateable bundle name
+//     // let new_bundle_name: string = ""; //Any valid bundle name
 
-    // await bundle.bundle_update(updateable_bundle_name, new_bundle_name);
+//     // await bundle.bundle_update(updateable_bundle_name, new_bundle_name);
 
-})
+// })
 
 
 /* ------------------------ Release CRUD ------------------------ */
-test("Release CRUD", async ({ request }) => {
+// test("Release CRUD", async ({ request }) => {
 
-    const product = new ProductPage(request);
+//     const product = new ProductPage(request);
 
-    const release_versions: string[] = [];
-    const updated_release_versions: string[] = [];
-    const releaseable_products_slug = plugins_slug.concat(themes_slug);
+//     const release_versions: string[] = [];
+//     const updated_release_versions: string[] = [];
+//     const releaseable_products_slug = plugins_slug.concat(themes_slug);
 
-    /* -------- Release Create -------- */
-    for (let i: number = 0; i < releaseable_products_slug.length; i++) {
-        if (i % 2 == 0) {
-            await product.release_create(releaseable_products_slug[i], 'plugins');
-        }
-        else {
-            await product.release_create(releaseable_products_slug[i], 'themes');
-        }
-    }
+//     /* -------- Release Create -------- */
+//     for (let i: number = 0; i < releaseable_products_slug.length; i++) {
+//         if (i % 2 == 0) {
+//             await product.release_create(releaseable_products_slug[i], 'plugins');
+//         }
+//         else {
+//             await product.release_create(releaseable_products_slug[i], 'themes');
+//         }
+//     }
 
-    /* -------- Release Update -------- */
-    // for (let i: number = 0; i < products_name.length; i++) {
-    //     updated_release_versions.push(await product.release_update(products_name[i], release_versions[i]));
-    // }
+//     /* -------- Release Update -------- */
+//     // for (let i: number = 0; i < products_name.length; i++) {
+//     //     updated_release_versions.push(await product.release_update(products_name[i], release_versions[i]));
+//     // }
 
-    // /* -------- Release Delete -------- */
-    // for (let i: number = 0; i < products_name.length; i++) {
-    //     await product.release_delete(products_name[i], updated_release_versions[i]);
-    // }
+//     // /* -------- Release Delete -------- */
+//     // for (let i: number = 0; i < products_name.length; i++) {
+//     //     await product.release_delete(products_name[i], updated_release_versions[i]);
+//     // }
 
-})
+// })
 
 
 let products_list: string[][] = [];
 
 /* Get All Product List */
-test("Product List", async ({ request }) => {
+// test("Product List", async ({ request }) => {
 
-    const product = new ProductPage(request);
-    products_list = await product.product_list();
+//     const product = new ProductPage(request);
+//     products_list = await product.product_list();
 
-});
+// });
 
 
 /* ------------------------ Product Delete ------------------------ */
-test("Prodcut Delete", async ({ request }) => {
+// test("Prodcut Delete", async ({ request }) => {
 
-    const product = new ProductPage(request);
+//     const product = new ProductPage(request);
 
-    // const product_type = 'plugins';
-    // await product.product_delete(products_slug, products_type);
+//     // const product_type = 'plugins';
+//     // await product.product_delete(products_slug, products_type);
 
-    if (products_list.length > 1) {
+//     if (products_list.length > 1) {
 
-        for (let i: number = 0; i < products_list.length; i++) {
-            await product.product_delete(products_list[i][0], products_list[i][1]);
-        }
-    }
+//         for (let i: number = 0; i < products_list.length; i++) {
+//             await product.product_delete(products_list[i][0], products_list[i][1]);
+//         }
+//     }
 
-    else {
-        console.log("No Product Found");
-    }
+//     else {
+//         console.log("No Product Found");
+//     }
 
-})
+// })
 
 auth = "";

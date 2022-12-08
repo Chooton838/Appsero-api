@@ -3,5 +3,6 @@ node_modules/
 /playwright-report/
 /playwright/.cache/
 .env
+overview stats.json
 .vscode
 .DS_Store

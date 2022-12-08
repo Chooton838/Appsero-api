@@ -127,4 +127,25 @@ export class ProductPage {
 
   };
 
+
+  async mailchimp_integrations() {
+
+    let products_prop: string[][] = [];
+
+    const mailchimp_integrations = await this.request.get(`${base_url}/v1/projects`, {
+      headers: {
+        'authorization': auth,
+      },
+      data: {
+        interests: {},
+        list: "16657e67cd",
+        tags: "",
+        enabled: true
+      }
+    });
+
+    expect(mailchimp_integrations.status()).toBeTruthy();
+
+  };
+
 }
