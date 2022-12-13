@@ -1,11 +1,8 @@
-import { expect, APIRequestContext } from '@playwright/test';
-import { base_url } from '../utils/data';
-import { ProductPage } from "../pages/products";
+import { APIRequestContext, expect } from "@playwright/test";
 import { auth } from "../tests/main.spec";
-
+import { base_url } from "../utils/data";
 
 export class BundlePage {
-
   readonly request: APIRequestContext;
 
   constructor(request: APIRequestContext) {
@@ -13,27 +10,27 @@ export class BundlePage {
   }
 
   async bundle_create(bundle_name, products_id) {
-
-    const bundle_create = await this.request.post(`${base_url}/v1/onboarding/basic-information/`, {
-      headers: {
-        'authorization': auth,
-      },
-      data: {
-        'name': bundle_name,
-        'slug': ((bundle_name.split(" ")).join("_")).toLowerCase(),
-        'project_ids': products_id,
-        //'variation_ids':,
-        'type': "bundle",
-        'icon_file': null,
+    const bundle_create = await this.request.post(
+      `${base_url}/v1/onboarding/basic-information/`,
+      {
+        headers: {
+          authorization: auth,
+        },
+        data: {
+          name: bundle_name,
+          slug: bundle_name.split(" ").join("_").toLowerCase(),
+          project_ids: products_id,
+          //'variation_ids':,
+          type: "bundle",
+          icon_file: null,
+        },
       }
-    });
+    );
 
-    expect(bundle_create.status()).toBeTruthy();
+    expect(bundle_create.ok()).toBeTruthy();
 
-    return ((bundle_name.split(" ")).join("_")).toLowerCase();
-
-  };
-
+    return bundle_name.split(" ").join("_").toLowerCase();
+  }
 
   // async bundle_update(updateable_bundle_name, new_bundle_name) {
 
