@@ -3,6 +3,7 @@ import * as faker from "faker";
 
 import { BundlePage } from "../pages/bundle";
 import { DashboardPage } from "../pages/dashboard";
+import { IntegrationPage } from "../pages/integrations";
 import { LoginPage } from "../pages/login";
 import { PluginPage } from "../pages/plugin";
 import { ProductPage } from "../pages/products";
@@ -91,14 +92,47 @@ test("Theme List, Create & Update", async ({ request }) => {
 
 const products_id: string[] = [];
 
-/* ------------------------ Products ID ------------------------ */
+/* ---- Products ID ---- */
 test("Products id", async ({ request }) => {
   const product = new ProductPage(request);
 
   const products_slug = plugins_slug.concat(themes_slug);
 
-  products_id.push(await product.product_details(products_slug[1], "plugins"));
-  products_id.push(await product.product_details(products_slug[3], "themes"));
+  products_id.push(
+    await product.product_details(products_slug[1], "plugins"),
+    await product.product_details(products_slug[3], "themes")
+  );
+});
+
+/* ------------------------ Release CRUD ------------------------ */
+test("Release CRUD", async ({ request }) => {
+  const product = new ProductPage(request);
+  const releaseable_products_list = await product.product_list();
+
+  // const release_versions: string[] = [];
+  // const updated_release_versions: string[] = [];
+
+  /* -------- Release Create -------- */
+  if (releaseable_products_list.length >= 1) {
+    for (let i: number = 0; i < releaseable_products_list.length; i++) {
+      await product.release_create(
+        releaseable_products_list[i][0],
+        releaseable_products_list[i][1]
+      );
+    }
+  } else {
+    console.log("No Product Found");
+  }
+
+  /* -------- Release Update -------- */
+  // for (let i: number = 0; i < products_name.length; i++) {
+  //     updated_release_versions.push(await product.release_update(products_name[i], release_versions[i]));
+  // }
+
+  // /* -------- Release Delete -------- */
+  // for (let i: number = 0; i < products_name.length; i++) {
+  //     await product.release_delete(products_name[i], updated_release_versions[i]);
+  // }
 });
 
 /* ------------------------ Bundle ------------------------ */
@@ -126,44 +160,33 @@ test("Bundle Create & Update", async ({ request }) => {
   // await bundle.bundle_update(updateable_bundle_name, new_bundle_name);
 });
 
-/* ------------------------ Release CRUD ------------------------ */
-// test("Release CRUD", async ({ request }) => {
-
-//     const product = new ProductPage(request);
-
-//     const release_versions: string[] = [];
-//     const updated_release_versions: string[] = [];
-//     const releaseable_products_slug = plugins_slug.concat(themes_slug);
-
-//     /* -------- Release Create -------- */
-//     for (let i: number = 0; i < releaseable_products_slug.length; i++) {
-//         if (i % 2 == 0) {
-//             await product.release_create(releaseable_products_slug[i], 'plugins');
-//         }
-//         else {
-//             await product.release_create(releaseable_products_slug[i], 'themes');
-//         }
-//     }
-
-//     /* -------- Release Update -------- */
-//     // for (let i: number = 0; i < products_name.length; i++) {
-//     //     updated_release_versions.push(await product.release_update(products_name[i], release_versions[i]));
-//     // }
-
-//     // /* -------- Release Delete -------- */
-//     // for (let i: number = 0; i < products_name.length; i++) {
-//     //     await product.release_delete(products_name[i], updated_release_versions[i]);
-//     // }
-
-// })
-
 let products_list: string[][] = [];
 
-/* Get All Product List */
+/* ---- Get All Product List ---- */
 test("Product List", async ({ request }) => {
   const product = new ProductPage(request);
   products_list = await product.product_list();
-  console.log(products_list);
+});
+
+/* ------------------------ Integrations ------------------------ */
+
+/* ---- Mailchimp Integration ---- */
+test("Mailchimp Integration", async ({ request }) => {
+  const mailchimp_integration = new IntegrationPage(request);
+
+  const list_id = await mailchimp_integration.mailchimp_lists_id();
+
+  if (products_list.length >= 1) {
+    for (let i: number = 0; i < products_list.length; i++) {
+      await mailchimp_integration.mailchimp_integration(
+        products_list[i][0],
+        products_list[i][1],
+        list_id
+      );
+    }
+  } else {
+    console.log("No Product Found");
+  }
 });
 
 /* ------------------------ Product Delete ------------------------ */

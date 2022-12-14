@@ -72,9 +72,6 @@ export class ProductPage {
     );
 
     expect(product_delete.ok()).toBeTruthy();
-
-    // const product_delete_response = await product_delete.json();
-    // console.log(product_delete_response);
   }
 
   async selling_platform_selection(platform_name) {
@@ -102,44 +99,30 @@ export class ProductPage {
   }
 
   async release_create(product_slug, product_type) {
-    const product_delete = await this.request.post(
-      `${base_url}/v1/${product_type}/${product_slug}/releases`,
+    var objFilelocation = {},
+      slug = product_slug;
+    objFilelocation[slug] = {};
+
+    const release_create = await this.request.post(
+      `${base_url}/v1/${product_type}s/${product_slug}/releases`,
       {
         headers: {
           authorization: auth,
         },
         data: {
-          change_log: "IR",
-          file_location: { product_slug: {} },
-          release_date: "2022-12-06",
-          version: "0.0.1",
+          change_log: `Initial Release for ${product_slug}`,
+          file_location: objFilelocation,
+          // release_date: "2022-12-16T08:44:38.941Z",
+          release_date: new Date().toISOString(),
+          version: "1.1.1",
         },
       }
     );
 
-    expect(product_delete.ok()).toBeTruthy();
+    expect(release_create.ok()).toBeTruthy();
   }
 
   async release_update(product_name, version) {}
 
   async release_delete(product_name, version) {}
-
-  async mailchimp_integrations(product_slug, product_type) {
-    const mailchimp_integrations = await this.request.get(
-      `${base_url}/v1/${product_type}/${product_slug}/integrations/mailchimp`,
-      {
-        headers: {
-          authorization: auth,
-        },
-        data: {
-          interests: {},
-          list: "16657e67cd",
-          tags: "",
-          enabled: true,
-        },
-      }
-    );
-
-    expect(mailchimp_integrations.ok()).toBeTruthy();
-  }
 }
