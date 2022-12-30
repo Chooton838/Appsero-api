@@ -23,6 +23,7 @@ export class BundlePage {
           //'variation_ids':,
           type: "bundle",
           icon_file: null,
+          premium: 1,
         },
       }
     );

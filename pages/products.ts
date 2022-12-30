@@ -74,28 +74,81 @@ export class ProductPage {
     expect(product_delete.ok()).toBeTruthy();
   }
 
-  async selling_platform_selection(platform_name) {
-    const selling_platform: string = platform_name;
+  async license_mapping(product_slug, selling_platform_name) {
+    let license: Array<string> = [];
+    const selling_platform_selection = selling_platform_name;
 
-    switch (selling_platform) {
+    switch (selling_platform_selection) {
       case "woocom":
+        license.push("woo");
+        license.push("woo");
         break;
 
       case "edd":
+        license.push("edd");
+        license.push("edd");
         break;
 
       case "gumroad":
+        license.push("appsero");
+        license.push("gumroad");
         break;
 
       case "paddle":
+        license.push("appsero");
+        license.push("paddle");
         break;
 
       case "fastspring":
+        license.push("appsero");
+        license.push("fastspring");
         break;
 
       default:
-        break;
+        console.log("Invalid License");
+        return;
     }
+
+    const license_mapping = await this.request.post(
+      `${base_url}/v1/projects/${product_slug}/settings/licensing`,
+      {
+        headers: {
+          authorization: auth,
+        },
+        data: {
+          hosted_at: license[0],
+          license_source: "Native",
+          premium: true,
+          sale_via: license[1],
+          update_source: true,
+        },
+      }
+    );
+    license = [];
+
+    expect(license_mapping.ok()).toBeTruthy();
+  }
+
+  async single_variation_single_payment(product_slug, limit, price) {
+    const single_variation_single_payment = await this.request.post(
+      `${base_url}/v1/projects/${product_slug}/settings/variations`,
+      {
+        headers: {
+          authorization: auth,
+        },
+        data: {
+          default_variation: {
+            activation_limit: limit,
+            price: price,
+            recurring: 0,
+            period: null,
+          },
+          has_variations: false,
+        },
+      }
+    );
+
+    expect(single_variation_single_payment.ok()).toBeTruthy();
   }
 
   async release_create(product_slug, product_type) {
@@ -111,7 +164,8 @@ export class ProductPage {
         },
         data: {
           change_log: `Initial Release for ${product_slug}`,
-          file_location: objFilelocation,
+          // file_location: objFilelocation,
+          file_location: { ...{}, [product_slug]: {} },
           // release_date: "2022-12-16T08:44:38.941Z",
           release_date: new Date().toISOString(),
           version: "1.1.1",

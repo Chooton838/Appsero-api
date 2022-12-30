@@ -15,7 +15,7 @@ const themes_slug: string[] = [];
 export let auth: string = "";
 
 /* ------------------------ Login ------------------------ */
-test("Login", async ({ request }) => {
+test("Login @demo", async ({ request }) => {
   const login = new LoginPage(request);
   const token = await login.login(process.env.USER_NAME, process.env.PASSWORD);
   auth = `Bearer ${token}`;
@@ -90,7 +90,7 @@ test("Theme List, Create & Update", async ({ request }) => {
   // }
 });
 
-const products_id: string[] = [];
+let products_id: string[] = [];
 
 /* ---- Products ID ---- */
 test("Products id", async ({ request }) => {
@@ -163,9 +163,36 @@ test("Bundle Create & Update", async ({ request }) => {
 let products_list: string[][] = [];
 
 /* ---- Get All Product List ---- */
-test("Product List", async ({ request }) => {
+test("Product List @demo", async ({ request }) => {
   const product = new ProductPage(request);
   products_list = await product.product_list();
+});
+
+/* ---- License Mapping ---- */
+test("License Mapping", async ({ request }) => {
+  const product = new ProductPage(request);
+  const selling_platform_name = "woocom"; // Could be "edd", "gumroad", "paddle", "fastspring"
+
+  if (products_list.length >= 1) {
+    await product.license_mapping(products_list[1][0], selling_platform_name);
+    await product.license_mapping(products_list[3][0], selling_platform_name);
+    await product.license_mapping(products_list[4][0], selling_platform_name);
+  } else {
+    console.log("No Product Found");
+  }
+});
+
+/* ------------------------ Products Variations ------------------------ */
+test("Single variation & One Time Payment", async ({ request }) => {
+  const product = new ProductPage(request);
+
+  if (products_list.length >= 1) {
+    await product.single_variation_single_payment(products_list[1][0], 1, 50);
+    await product.single_variation_single_payment(products_list[3][0], 1, 35);
+    await product.single_variation_single_payment(products_list[4][0], 1, 80);
+  } else {
+    console.log("No Product Found");
+  }
 });
 
 /* ------------------------ Integrations ------------------------ */
@@ -190,16 +217,16 @@ test("Mailchimp Integration", async ({ request }) => {
 });
 
 /* ------------------------ Product Delete ------------------------ */
-test("Prodcut Delete", async ({ request }) => {
-  const product = new ProductPage(request);
+// test("Prodcut Delete @demo", async ({ request }) => {
+//   const product = new ProductPage(request);
 
-  if (products_list.length >= 1) {
-    for (let i: number = 0; i < products_list.length; i++) {
-      await product.product_delete(products_list[i][0], products_list[i][1]);
-    }
-  } else {
-    console.log("No Product Found");
-  }
-});
+//   if (products_list.length >= 1) {
+//     for (let i: number = 0; i < products_list.length; i++) {
+//       await product.product_delete(products_list[i][0], products_list[i][1]);
+//     }
+//   } else {
+//     console.log("No Product Found");
+//   }
+// });
 
 auth = "";
