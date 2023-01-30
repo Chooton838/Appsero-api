@@ -1,4 +1,5 @@
 import { APIRequestContext, expect } from "@playwright/test";
+import config from "../playwright.config";
 import { base_url } from "../utils/data";
 
 export class LoginPage {
@@ -8,13 +9,15 @@ export class LoginPage {
     this.request = request;
   }
 
-  async login(user_name, password) {
-    const login = await this.request.post(`${base_url}/login`, {
+  async login(login_data) {
+    const login = await this.request.post(`${login_data[0]}/login`, {
       data: {
-        email: user_name,
-        password: password,
+        email: login_data[1],
+        password: login_data[2],
+
       },
     });
+    console.log(login_data[0]);
 
     expect(login.ok()).toBeTruthy();
 

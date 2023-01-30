@@ -30,7 +30,7 @@ const config: PlaywrightTestConfig = {
   /* Opt out of parallel tests on CI. */
   workers: process.env.CI ? 1 : undefined,
   /* Reporter to use. See https://playwright.dev/docs/test-reporters */
-  reporter: 'html',
+  // reporter: 'html',
   /* Shared settings for all the projects below. See https://playwright.dev/docs/api/class-testoptions. */
   use: {
     /* Maximum time each action such as `click()` can take. Defaults to 0 (no limit). */
@@ -41,6 +41,18 @@ const config: PlaywrightTestConfig = {
 
     /* Collect trace when retrying the failed test. See https://playwright.dev/docs/trace-viewer */
     trace: 'on-first-retry',
+    // httpCredentials: username: 'sdfdsf', password: 'sdfsfsdf',
+
+
+
+    baseURL: process.env.STAGING === '1' ? 'https://staging.api.appsero.com' : 'https://api.appsero.com',
+    httpCredentials: process.env.STAGING === '1' ? {
+      username: process.env.STAGING_USER_NAME!,
+      password: process.env.STAGING_PASSWORD!,
+    } : {
+      username: process.env.USER_NAME!,
+      password: process.env.PASSWORD!,
+    },
   },
 
   /* Configure projects for major browsers */
