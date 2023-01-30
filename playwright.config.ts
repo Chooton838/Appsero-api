@@ -31,6 +31,17 @@ const config: PlaywrightTestConfig = {
   workers: process.env.CI ? 1 : undefined,
   /* Reporter to use. See https://playwright.dev/docs/test-reporters */
   // reporter: 'html',
+  reporter: process.env.CI
+    ? [
+      ["html"],
+      ["list", { printSteps: true }],
+      ["junit", { outputFile: "playwright-report/results.xml" }],
+    ]
+    : [
+      ["html", { open: "never", outputFolder: "playwright-report" }],
+      ["list", { printSteps: true }],
+      ["junit", { outputFile: "playwright-report/results.xml" }],
+    ],
   /* Shared settings for all the projects below. See https://playwright.dev/docs/api/class-testoptions. */
   use: {
     /* Maximum time each action such as `click()` can take. Defaults to 0 (no limit). */
