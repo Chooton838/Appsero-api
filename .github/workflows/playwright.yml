@@ -20,7 +20,7 @@ jobs:
       run: npx playwright install --with-deps
     - name: Run Playwright tests
       run: $env.STAGING=0
-      run: npx playwright test
+           npx playwright test
       env:
         CI: true
         USER_NAME: ${{ secrets.USER_NAME }}
