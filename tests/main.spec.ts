@@ -16,7 +16,7 @@ const themes_slug: string[] = [];
 export let auth: string = "";
 
 /* ------------------------ Login ------------------------ */
-test.only("Login", async ({ request }) => {
+test("Login @login", async ({ request }) => {
     const login_data: Array<string> = [config.use?.baseURL!, config.use?.httpCredentials?.username!,
     config.use?.httpCredentials?.password!];
     const login = new LoginPage(request);
