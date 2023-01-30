@@ -1,75 +1,73 @@
 name: Playwright Tests
 on:
-  env:
-      CI: true
-      USER_NAME: ${{ secrets.USER_NAME }}
-      PASSWORD: ${{ secrets.PASSWORD }}
-      STAGING: ${{ secrets.STAGING }}
-      STAGING_USER_NAME: ${{ secrets.STAGING_USER_NAME }}
-      STAGING_PASSWORD: ${{ secrets.STAGING_PASSWORD }}
   push:
     # branches: [ main, master ]
-    branches: [ main ]
-
-    jobs:
-      production_test:
-        timeout-minutes: 60
-        runs-on: ubuntu-latest
-        steps:
-        - uses: actions/checkout@v3
-        - uses: actions/setup-node@v3
-          with:
-            node-version: 16
-        - name: Install dependencies
-          run: npm ci
-        - name: Run Playwright tests on Production
-          run: STAGING=0 npx playwright test -g "Login"
-          env:
-            CI: true
-            USER_NAME: ${{ secrets.USER_NAME }}
-            PASSWORD: ${{ secrets.PASSWORD }}
-            STAGING: ${{ secrets.STAGING }}
-            STAGING_USER_NAME: ${{ secrets.STAGING_USER_NAME }}
-            STAGING_PASSWORD: ${{ secrets.STAGING_PASSWORD }}
-        - name: Save Screenshots
-          uses: actions/upload-artifact@v3
-          if: always()
-          with:
-            name: playwright-report
-            path: playwright-report/
-            retention-days: 30
-
-    branches: [refactor]
-    jobs:
-      staging_test:
-        timeout-minutes: 60
-        runs-on: ubuntu-latest
-        steps:
-        - uses: actions/checkout@v3
-        - uses: actions/setup-node@v3
-          with:
-            node-version: 16
-        - name: Install dependencies
-          run: npm ci
-        - name: Run Playwright tests on Staging
-          # run: npx playwright test
-          run: npx playwright test -g "Login"
-          # env:
-          #   CI: true
-          #   USER_NAME: ${{ secrets.USER_NAME }}
-          #   PASSWORD: ${{ secrets.PASSWORD }}
-          #   STAGING: ${{ secrets.STAGING }}
-          #   STAGING_USER_NAME: ${{ secrets.STAGING_USER_NAME }}
-          #   STAGING_PASSWORD: ${{ secrets.STAGING_PASSWORD }}
-        - name: Save Screenshots
-          uses: actions/upload-artifact@v3
-          if: always()
-          with:
-            name: playwright-report
-            path: playwright-report/
-            retention-days: 30
-
+    # branches: [ main ]
   # pull_request:
-  #   branches: [ main, master ]
+    # branches: [ main, master ]
+env:
+    CI: true
+    USER_NAME: ${{ secrets.USER_NAME }}
+    PASSWORD: ${{ secrets.PASSWORD }}
+    STAGING: ${{ secrets.STAGING }}
+    STAGING_USER_NAME: ${{ secrets.STAGING_USER_NAME }}
+    STAGING_PASSWORD: ${{ secrets.STAGING_PASSWORD }}
+jobs:
+  production_test:
+    if: ${{ github.ref_name == 'refactor' }}
+    timeout-minutes: 60
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v3
+    - uses: actions/setup-node@v3
+      with:
+        node-version: 16
+    - name: Install dependencies
+      run: npm ci
+    - name: Run Playwright tests on Production
+      run: STAGING=0 npx playwright test -g "Login"
+      # env:
+      #   CI: true
+      #   USER_NAME: ${{ secrets.USER_NAME }}
+      #   PASSWORD: ${{ secrets.PASSWORD }}
+      #   STAGING: ${{ secrets.STAGING }}
+      #   STAGING_USER_NAME: ${{ secrets.STAGING_USER_NAME }}
+      #   STAGING_PASSWORD: ${{ secrets.STAGING_PASSWORD }}
+    - name: Save Screenshots
+      uses: actions/upload-artifact@v3
+      if: always()
+      with:
+        name: playwright-report
+        path: playwright-report/
+        retention-days: 30
 
 
+
+  staging_test:
+    if: ${{ github.ref_name == 'main' }}
+    timeout-minutes: 60
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v3
+    - uses: actions/setup-node@v3
+      with:
+        node-version: 16
+    - name: Install dependencies
+      run: npm ci
+    - name: Run Playwright tests on Staging
+      # run: npx playwright test
+      run: npx playwright test -g "Login"
+      # env:
+      #   CI: true
+      #   USER_NAME: ${{ secrets.USER_NAME }}
+      #   PASSWORD: ${{ secrets.PASSWORD }}
+      #   STAGING: ${{ secrets.STAGING }}
+      #   STAGING_USER_NAME: ${{ secrets.STAGING_USER_NAME }}
+      #   STAGING_PASSWORD: ${{ secrets.STAGING_PASSWORD }}
+    - name: Save Screenshots
+      uses: actions/upload-artifact@v3
+      if: always()
+      with:
+        name: playwright-report
+        path: playwright-report/
+        retention-days: 30
