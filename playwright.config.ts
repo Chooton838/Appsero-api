@@ -61,8 +61,8 @@ const config: PlaywrightTestConfig = {
       username: process.env.STAGING_USER_NAME!,
       password: process.env.STAGING_PASSWORD!,
     } : {
-      username: `${process.env.USER_NAME} prod`,
-      password: `${process.env.PASSWORD} prod`,
+      username: process.env.USER_NAME!,
+      password: process.env.PASSWORD!,
     },
   },
 
