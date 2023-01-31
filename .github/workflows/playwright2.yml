@@ -1,5 +1,9 @@
 name: Playwright Tests
 on:
+  workflow_dispatch:
+  # schedule:
+  #   - cron: "*/10 * * * *"
+  # At the end of every day
   push:
     # branches: [ main, master ]
     # branches: [ main ]
@@ -26,13 +30,6 @@ jobs:
       run: npm ci
     - name: Run Playwright tests on Production
       run: STAGING=0 npx playwright test -g "Login"
-      # env:
-      #   CI: true
-      #   USER_NAME: ${{ secrets.USER_NAME }}
-      #   PASSWORD: ${{ secrets.PASSWORD }}
-      #   STAGING: ${{ secrets.STAGING }}
-      #   STAGING_USER_NAME: ${{ secrets.STAGING_USER_NAME }}
-      #   STAGING_PASSWORD: ${{ secrets.STAGING_PASSWORD }}
     - name: Save Screenshots
       uses: actions/upload-artifact@v3
       if: always()
@@ -40,8 +37,6 @@ jobs:
         name: playwright-report
         path: playwright-report/
         retention-days: 30
-
-
 
   staging_test:
     if: ${{ github.ref_name == 'main' }}
@@ -57,13 +52,6 @@ jobs:
     - name: Run Playwright tests on Staging
       # run: npx playwright test
       run: npx playwright test -g "Login"
-      # env:
-      #   CI: true
-      #   USER_NAME: ${{ secrets.USER_NAME }}
-      #   PASSWORD: ${{ secrets.PASSWORD }}
-      #   STAGING: ${{ secrets.STAGING }}
-      #   STAGING_USER_NAME: ${{ secrets.STAGING_USER_NAME }}
-      #   STAGING_PASSWORD: ${{ secrets.STAGING_PASSWORD }}
     - name: Save Screenshots
       uses: actions/upload-artifact@v3
       if: always()
