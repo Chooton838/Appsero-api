@@ -23,8 +23,8 @@ test("Login @data_cleanup", async ({ request }) => {
     config.use?.httpCredentials?.password!,
   ];
   const login = new LoginPage(request);
-  const token = await login.login(login_data);
-  auth = `Bearer ${token}`;
+  await login.login(login_data);
+  // auth = `Bearer ${token}`;
 });
 
 /* ------------------------ Getting Dashboard Details ------------------------ */
