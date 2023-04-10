@@ -18,13 +18,11 @@ export class LoginPage {
 
     expect(login.ok()).toBeTruthy();
     console.log(login_data[0]);
-    console.log(login_data[1]);
 
     var login_response = { api_token: "" };
 
     try {
       login_response = await login.json();
-      console.log(login_response.api_token);
       config.use!.extraHTTPHeaders!.authorization = `Bearer ${login_response.api_token}`;
     } catch (err) {
       console.log("Error: ", login.statusText());
