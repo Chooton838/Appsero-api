@@ -16,6 +16,7 @@ export class LoginPage {
     });
 
     expect(login.ok()).toBeTruthy();
+    console.log(login_data[0]);
 
     var login_response = { api_token: "" };
 
