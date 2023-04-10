@@ -1,6 +1,4 @@
 import { APIRequestContext, expect } from "@playwright/test";
-import config from "../playwright.config";
-import { base_url } from "../utils/data";
 
 export class LoginPage {
   readonly request: APIRequestContext;
@@ -14,10 +12,8 @@ export class LoginPage {
       data: {
         email: login_data[1],
         password: login_data[2],
-
       },
     });
-    console.log(login_data[0]);
 
     expect(login.ok()).toBeTruthy();
 
