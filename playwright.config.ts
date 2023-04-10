@@ -43,6 +43,8 @@ const config: PlaywrightTestConfig = {
             username: process.env.USER_NAME!,
             password: process.env.PASSWORD!,
           },
+
+    extraHTTPHeaders: { authorization: "" },
   },
 
   projects: [

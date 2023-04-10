@@ -9,7 +9,7 @@ on:
     branches: [main, refactor]
     # branches: [ main ]
   pull_request:
-    branches: [main]
+    # branches: [main]
 
 env:
   CI: true
@@ -21,7 +21,8 @@ env:
 
 jobs:
   production_test:
-    if: ${{ github.ref_name == 'refactor' }}
+    # if: github.ref_name == 'refactor' || 'hotfix/**'
+    if: github.ref_name == 'refactor' || github.ref_name == 'hotfix/**'
     timeout-minutes: 60
     runs-on: ubuntu-latest
     steps:
@@ -42,7 +43,7 @@ jobs:
           retention-days: 30
 
   staging_test:
-    if: ${{ github.ref_name == 'main' }}
+    if: github.ref_name != 'refactor' || 'hotfix/**'
     timeout-minutes: 60
     runs-on: ubuntu-latest
     steps:

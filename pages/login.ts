@@ -1,4 +1,5 @@
 import { APIRequestContext, expect } from "@playwright/test";
+import config from "../playwright.config";
 
 export class LoginPage {
   readonly request: APIRequestContext;
@@ -22,10 +23,11 @@ export class LoginPage {
 
     try {
       login_response = await login.json();
+      config.use!.extraHTTPHeaders!.authorization = `Bearer ${login_response.api_token}`;
     } catch (err) {
       console.log("Error: ", login.statusText());
     }
 
-    return login_response.api_token;
+    // return login_response.api_token;
   }
 }
