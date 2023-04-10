@@ -21,7 +21,8 @@ env:
 
 jobs:
   production_test:
-    if: github.ref_name == 'refactor' || 'hotfix/**'
+    # if: github.ref_name == 'refactor' || 'hotfix/**'
+    if: github.ref_name == 'refactor'
     timeout-minutes: 60
     runs-on: ubuntu-latest
     steps:
