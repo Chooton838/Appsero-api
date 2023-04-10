@@ -21,7 +21,7 @@ env:
 
 jobs:
   production_test:
-    if: ${{ github.ref_name == 'refactor'}} || ${{ github.ref_name == 'hotfix/**' }}
+    if: github.ref_name == 'refactor' || 'hotfix/**'
     timeout-minutes: 60
     runs-on: ubuntu-latest
     steps:
@@ -42,7 +42,7 @@ jobs:
           retention-days: 30
 
   staging_test:
-    if: ${{ github.ref_name != 'refactor' || 'hotfix/**' }}
+    if: github.ref_name != 'refactor' || 'hotfix/**'
     timeout-minutes: 60
     runs-on: ubuntu-latest
     steps:
