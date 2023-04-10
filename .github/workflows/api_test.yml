@@ -42,7 +42,7 @@ jobs:
           retention-days: 30
 
   staging_test:
-    if: ${{ github.ref_name == 'main' }}
+    if: ${{ github.ref_name != 'refactor' }}
     timeout-minutes: 60
     runs-on: ubuntu-latest
     steps:
