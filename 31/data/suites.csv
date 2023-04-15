@@ -1,0 +1,2 @@
+"Status","Start Time","Stop Time","Duration in ms","Parent Suite","Suite","Sub Suite","Test Class","Test Method","Name","Description"
+"passed","Sat Apr 15 17:26:14 GMT 2023","Sat Apr 15 17:26:15 GMT 2023","1229","","main.spec.ts","","","","Login @data_cleanup",""
