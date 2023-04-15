@@ -67,7 +67,7 @@ test("Plugin List, Create & Update @gitactiontest", async ({ request }) => {
 });
 
 /* ------------------------ Theme ------------------------ */
-test("Theme List, Create & Update @gitactiontest", async ({ request }) => {
+test("Theme List, Create & Update", async ({ request }) => {
   const theme = new ThemePage(request);
 
   // Theme List
@@ -101,7 +101,7 @@ test("Theme List, Create & Update @gitactiontest", async ({ request }) => {
 let products_id: string[] = [];
 
 /* ---- Products ID ---- */
-test("Products id @gitactiontest", async ({ request }) => {
+test("Products id", async ({ request }) => {
   const product = new ProductPage(request);
 
   const products_slug = plugins_slug.concat(themes_slug);
@@ -113,7 +113,7 @@ test("Products id @gitactiontest", async ({ request }) => {
 });
 
 /* ------------------------ Release CRUD ------------------------ */
-test.skip("Release CRUD @gitactiontest", async ({ request }) => {
+test("Release CRUD", async ({ request }) => {
   const product = new ProductPage(request);
   const releaseable_products_list = await product.product_list();
 
@@ -144,7 +144,7 @@ test.skip("Release CRUD @gitactiontest", async ({ request }) => {
 });
 
 /* ------------------------ Bundle ------------------------ */
-test.skip("Bundle Create & Update @gitactiontest", async ({ request }) => {
+test("Bundle Create & Update", async ({ request }) => {
   const bundle = new BundlePage(request);
 
   //Could be any valid bundle name
