@@ -16,7 +16,7 @@ const themes_slug: string[] = [];
 export let auth: string = "";
 
 /* ------------------------ Login ------------------------ */
-test.only("Login @gitactiontest", async ({ request }) => {
+test("Login @gitactiontest", async ({ request }) => {
   const login_data: Array<string> = [
     config.use?.baseURL!,
     config.use?.httpCredentials?.username!,
@@ -36,9 +36,7 @@ test("Getting Dashboard Overview Details @gitactiontest", async ({
 });
 
 /* ------------------------ Plugin ------------------------ */
-test.only("Plugin List, Create & Update @gitactiontest", async ({
-  request,
-}) => {
+test("Plugin List, Create & Update @gitactiontest", async ({ request }) => {
   const plugin = new PluginPage(request);
 
   // Plugin List
@@ -69,7 +67,7 @@ test.only("Plugin List, Create & Update @gitactiontest", async ({
 });
 
 /* ------------------------ Theme ------------------------ */
-test.only("Theme List, Create & Update @gitactiontest", async ({ request }) => {
+test("Theme List, Create & Update @gitactiontest", async ({ request }) => {
   const theme = new ThemePage(request);
 
   // Theme List
@@ -103,7 +101,7 @@ test.only("Theme List, Create & Update @gitactiontest", async ({ request }) => {
 let products_id: string[] = [];
 
 /* ---- Products ID ---- */
-test.only("Products id @gitactiontest", async ({ request }) => {
+test("Products id @gitactiontest", async ({ request }) => {
   const product = new ProductPage(request);
 
   const products_slug = plugins_slug.concat(themes_slug);
