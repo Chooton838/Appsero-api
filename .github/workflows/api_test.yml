@@ -121,7 +121,7 @@ jobs:
           npm install allure-commandline
 
       - name: Run Playwright tests on Staging
-        run: STAGING=1 npx playwright test -g "Login"
+        run: STAGING=1 npx playwright test --grep @gitactiontest
 
       - name: Get Allure history
         uses: actions/checkout@v3

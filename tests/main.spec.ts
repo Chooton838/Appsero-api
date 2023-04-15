@@ -16,7 +16,7 @@ const themes_slug: string[] = [];
 export let auth: string = "";
 
 /* ------------------------ Login ------------------------ */
-test.only("Login @data_cleanup", async ({ request }) => {
+test("Login @gitactiontest", async ({ request }) => {
   const login_data: Array<string> = [
     config.use?.baseURL!,
     config.use?.httpCredentials?.username!,
@@ -28,13 +28,15 @@ test.only("Login @data_cleanup", async ({ request }) => {
 });
 
 /* ------------------------ Getting Dashboard Details ------------------------ */
-test.only("Getting Dashboard Overview Details", async ({ request }) => {
+test("Getting Dashboard Overview Details @gitactiontest", async ({
+  request,
+}) => {
   const dashboard = new DashboardPage(request);
   await dashboard.overview_details();
 });
 
 /* ------------------------ Plugin ------------------------ */
-test.only("Plugin List, Create & Update", async ({ request }) => {
+test("Plugin List, Create & Update @gitactiontest", async ({ request }) => {
   const plugin = new PluginPage(request);
 
   // Plugin List
