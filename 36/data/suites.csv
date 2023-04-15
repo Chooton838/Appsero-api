@@ -1,0 +1,7 @@
+"Status","Start Time","Stop Time","Duration in ms","Parent Suite","Suite","Sub Suite","Test Class","Test Method","Name","Description"
+"failed","Sat Apr 15 18:37:46 GMT 2023","Sat Apr 15 18:37:47 GMT 2023","924","","main.spec.ts","","","","Theme List, Create & Update @gitactiontest",""
+"skipped","Sat Apr 15 18:37:53 GMT 2023","Sat Apr 15 18:37:53 GMT 2023","1","","main.spec.ts","","","","Release CRUD @gitactiontest",""
+"failed","Sat Apr 15 18:37:52 GMT 2023","Sat Apr 15 18:37:53 GMT 2023","917","","main.spec.ts","","","","Products id @gitactiontest",""
+"passed","Sat Apr 15 18:37:36 GMT 2023","Sat Apr 15 18:37:41 GMT 2023","5116","","main.spec.ts","","","","Plugin List, Create & Update @gitactiontest",""
+"passed","Sat Apr 15 18:37:34 GMT 2023","Sat Apr 15 18:37:35 GMT 2023","1156","","main.spec.ts","","","","Login @gitactiontest",""
+"passed","Sat Apr 15 18:37:35 GMT 2023","Sat Apr 15 18:37:36 GMT 2023","1178","","main.spec.ts","","","","Getting Dashboard Overview Details @gitactiontest",""
