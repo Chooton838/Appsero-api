@@ -1,5 +1,5 @@
+import { faker } from "@faker-js/faker";
 import { APIRequestContext, expect } from "@playwright/test";
-import * as faker from "faker";
 import { auth } from "../tests/main.spec";
 import { base_url } from "../utils/data";
 

@@ -8,16 +8,11 @@
   "author": "",
   "license": "ISC",
   "devDependencies": {
-    "@playwright/test": "^1.28.1",
-    "eslint": "^8.29.0",
-    "eslint-config-airbnb-base": "^15.0.0",
-    "eslint-config-prettier": "^8.5.0",
-    "eslint-plugin-import": "^2.26.0",
-    "eslint-plugin-prettier": "^4.2.1",
-    "prettier": "^2.8.1"
+    "@faker-js/faker": "^7.6.0",
+    "@playwright/test": "^1.30.0",
+    "dotenv": "^16.0.3"
   },
   "dependencies": {
-    "dotenv": "^16.0.3",
-    "faker": "^5.5.3"
+    "allure-playwright": "^2.0.0-beta.26"
   }
 }

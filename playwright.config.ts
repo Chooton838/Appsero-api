@@ -1,5 +1,4 @@
 import type { PlaywrightTestConfig } from "@playwright/test";
-import { devices } from "@playwright/test";
 
 require("dotenv").config();
 
@@ -15,14 +14,16 @@ const config: PlaywrightTestConfig = {
   workers: process.env.CI ? 1 : undefined,
   reporter: process.env.CI
     ? [
-        ["html"],
+        ["html", { open: "never" }],
         ["list", { printSteps: true }],
         ["junit", { outputFile: "playwright-report/results.xml" }],
+        ["allure-playwright"],
       ]
     : [
         ["html", { open: "never", outputFolder: "playwright-report" }],
         ["list", { printSteps: true }],
         ["junit", { outputFile: "playwright-report/results.xml" }],
+        ["allure-playwright"],
       ],
   use: {
     actionTimeout: 0,
@@ -46,15 +47,6 @@ const config: PlaywrightTestConfig = {
 
     extraHTTPHeaders: { authorization: "" },
   },
-
-  projects: [
-    {
-      name: "chromium",
-      use: {
-        ...devices["Desktop Chrome"],
-      },
-    },
-  ],
 };
 
 export default config;

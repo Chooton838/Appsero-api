@@ -1,5 +1,5 @@
+import { faker } from "@faker-js/faker";
 import { test } from "@playwright/test";
-import * as faker from "faker";
 import config from "../playwright.config";
 
 import { BundlePage } from "../pages/bundle";

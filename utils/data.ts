@@ -1,4 +1,4 @@
-import * as faker from "faker";
+import { faker } from "@faker-js/faker";
 
 let base_url: string = "https://staging.api.appsero.com";
 
