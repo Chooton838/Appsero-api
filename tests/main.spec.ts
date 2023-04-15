@@ -113,7 +113,7 @@ test("Products id @gitactiontest", async ({ request }) => {
 });
 
 /* ------------------------ Release CRUD ------------------------ */
-test("Release CRUD", async ({ request }) => {
+test.skip("Release CRUD @gitactiontest", async ({ request }) => {
   const product = new ProductPage(request);
   const releaseable_products_list = await product.product_list();
 

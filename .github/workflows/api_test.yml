@@ -150,6 +150,7 @@ jobs:
           PUBLISH_DIR: allure-history
 
       - name: Allure Report Link
+        if: always()
         run: echo https://chooton838.github.io/Appsero-api/${{ github.run_number }}
 
       - name: Publish Test Report
