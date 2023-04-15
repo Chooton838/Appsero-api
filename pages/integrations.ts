@@ -1,6 +1,5 @@
 import { APIRequestContext, expect } from "@playwright/test";
-import { auth } from "../tests/main.spec";
-import { base_url } from "../utils/data";
+import config from "../playwright.config";
 
 export class IntegrationPage {
   readonly request: APIRequestContext;
@@ -11,12 +10,8 @@ export class IntegrationPage {
 
   async mailchimp_lists_id() {
     let mailchimp_list_id = await this.request.get(
-      `${base_url}/v1/integrations/mailchimp/lists`,
-      {
-        headers: {
-          authorization: auth,
-        },
-      }
+      `${config.use?.baseURL!}/v1/integrations/mailchimp/lists`,
+      {}
     );
 
     expect(mailchimp_list_id.ok()).toBeTruthy();
@@ -34,11 +29,9 @@ export class IntegrationPage {
 
   async mailchimp_integration(product_slug, product_type, list_id) {
     let mailchimp_integration = await this.request.post(
-      `${base_url}/v1/${product_type}/${product_slug}/integrations/mailchimp`,
+      `${config.use
+        ?.baseURL!}/v1/${product_type}/${product_slug}/integrations/mailchimp`,
       {
-        headers: {
-          authorization: auth,
-        },
         data: {
           interests: {},
           list: list_id,

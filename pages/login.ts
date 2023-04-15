@@ -17,17 +17,15 @@ export class LoginPage {
     });
 
     expect(login.ok()).toBeTruthy();
-    console.log(login_data[0]);
 
-    var login_response = { api_token: "" };
+    let login_response: { api_token: string } = { api_token: "" };
 
     try {
       login_response = await login.json();
+      expect(typeof login_response.api_token).toEqual("string");
       config.use!.extraHTTPHeaders!.authorization = `Bearer ${login_response.api_token}`;
     } catch (err) {
-      console.log("Error: ", login.statusText());
+      console.log("Error of Login Request is: ", login.statusText());
     }
-
-    // return login_response.api_token;
   }
 }

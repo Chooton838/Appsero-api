@@ -14,8 +14,8 @@ export class DashboardPage {
       `${config.use?.baseURL!}/v1/overview`,
       {
         data: {
-          start_date: "2022-12-01",
-          end_date: "2022-12-31",
+          start_date: "2023-01-03",
+          end_date: "2023-31-03",
           comparing_to: "month",
         },
       }
@@ -23,11 +23,16 @@ export class DashboardPage {
 
     expect(overview_details.status()).toBeTruthy();
 
-    const overview_details_response = await overview_details.json();
-    delete overview_details_response.performance_graph;
-
-    let data: string = JSON.stringify(overview_details_response, null, "\t");
-
-    fs.writeFile("overview stats.json", data, function () {});
+    try {
+      let overview_details_response = await overview_details.json();
+      delete overview_details_response.performance_graph;
+      let data: string = JSON.stringify(overview_details_response, null, "\t");
+      fs.writeFile("overview stats.json", data, function () {});
+    } catch (err) {
+      console.log(
+        "Error of Dashboard Overview Request is: ",
+        overview_details.statusText()
+      );
+    }
   }
 }

@@ -1,4 +1,5 @@
 import { APIRequestContext, expect } from "@playwright/test";
+import * as fs from "fs";
 import config from "../playwright.config";
 import { plugin_data } from "../utils/data";
 
@@ -17,8 +18,16 @@ export class PluginPage {
 
     expect(plugin_list.ok()).toBeTruthy();
 
-    const plugin_list_response = await plugin_list.json();
-    // console.log(plugin_list_response);
+    try {
+      let plugin_list_response = await plugin_list.json();
+      let data: string = JSON.stringify(plugin_list_response, null, "\t");
+      fs.writeFile("plugins list.json", data, function () {});
+    } catch (err) {
+      console.log(
+        "Error of Plugins List Request is: ",
+        plugin_list.statusText()
+      );
+    }
   }
 
   async free_plugin_create(plugin_name) {

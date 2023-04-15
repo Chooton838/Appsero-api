@@ -13,10 +13,8 @@ import { ThemePage } from "../pages/theme";
 const plugins_slug: string[] = [];
 const themes_slug: string[] = [];
 
-export let auth: string = "";
-
 /* ------------------------ Login ------------------------ */
-test("Login @gitactiontest", async ({ request }) => {
+test("Login", async ({ request }) => {
   const login_data: Array<string> = [
     config.use?.baseURL!,
     config.use?.httpCredentials?.username!,
@@ -24,33 +22,34 @@ test("Login @gitactiontest", async ({ request }) => {
   ];
   const login = new LoginPage(request);
   await login.login(login_data);
-  // auth = `Bearer ${token}`;
 });
 
 /* ------------------------ Getting Dashboard Details ------------------------ */
-test("Getting Dashboard Overview Details @gitactiontest", async ({
-  request,
-}) => {
+test("Getting Dashboard Overview Details", async ({ request }) => {
   const dashboard = new DashboardPage(request);
   await dashboard.overview_details();
 });
 
-/* ------------------------ Plugin ------------------------ */
-test("Plugin List, Create & Update @gitactiontest", async ({ request }) => {
+/* ------------------------ Plugin CRUD Functionalities ------------------------ */
+test("Get all the Plugins List", async ({ request }) => {
   const plugin = new PluginPage(request);
+  await plugin.plugin_list();
+});
 
-  // Plugin List
-  // await plugin.plugin_list();
-
+test("Free Plugin Create", async ({ request }) => {
+  const plugin = new PluginPage(request);
   const free_plugin_name: string = faker.lorem.words(2); //Auto generated plugin name
-  const pro_plugin_name: string = faker.lorem.words(2); //Auto generated plugin name
-  //const platform_name: string = "woocom";
-
-  // Free Plugin Create
   plugins_slug.push(await plugin.free_plugin_create(free_plugin_name));
+});
 
-  // Pro Plugin Create
+test("Premium Plugin Create", async ({ request }) => {
+  const plugin = new PluginPage(request);
+  const pro_plugin_name: string = faker.lorem.words(2); //Auto generated plugin name
   plugins_slug.push(await plugin.pro_plugin_create(pro_plugin_name));
+});
+
+test.skip("Plugin List, Create & Update", async ({ request }) => {
+  const plugin = new PluginPage(request);
 
   // Plugin Update
   const updateable_plugin_slug: string = ""; //Any existing plugin slug
@@ -171,7 +170,7 @@ test("Bundle Create & Update", async ({ request }) => {
 let products_list: string[][] = [];
 
 /* ---- Get All Product List ---- */
-test("Product List @data_cleanup", async ({ request }) => {
+test("Product List", async ({ request }) => {
   const product = new ProductPage(request);
   products_list = await product.product_list();
 });
@@ -225,7 +224,7 @@ test("Mailchimp Integration", async ({ request }) => {
 });
 
 /* ------------------------ Product Delete ------------------------ */
-test("Prodcut Delete @data_cleanup", async ({ request }) => {
+test("Prodcut Delete", async ({ request }) => {
   const product = new ProductPage(request);
 
   if (products_list.length >= 1) {
@@ -236,5 +235,3 @@ test("Prodcut Delete @data_cleanup", async ({ request }) => {
     console.log("No Product Found");
   }
 });
-
-auth = "";

@@ -1,6 +1,5 @@
 import { APIRequestContext, expect } from "@playwright/test";
-import { auth } from "../tests/main.spec";
-import { base_url } from "../utils/data";
+import config from "../playwright.config";
 
 export class ProductPage {
   readonly request: APIRequestContext;
@@ -12,11 +11,10 @@ export class ProductPage {
   async product_list() {
     let products_prop: string[][] = [];
 
-    let product_list = await this.request.get(`${base_url}/v1/projects`, {
-      headers: {
-        authorization: auth,
-      },
-    });
+    let product_list = await this.request.get(
+      `${config.use?.baseURL!}/v1/projects`,
+      {}
+    );
 
     expect(product_list.ok()).toBeTruthy();
 
@@ -46,12 +44,8 @@ export class ProductPage {
 
   async product_details(product_slug, product_type) {
     const product_details = await this.request.get(
-      `${base_url}/v1/${product_type}/${product_slug}`,
-      {
-        headers: {
-          authorization: auth,
-        },
-      }
+      `${config.use?.baseURL!}/v1/${product_type}/${product_slug}`,
+      {}
     );
 
     expect(product_details.ok()).toBeTruthy();
@@ -63,12 +57,8 @@ export class ProductPage {
 
   async product_delete(product_slug, product_type) {
     const product_delete = await this.request.delete(
-      `${base_url}/v1/${product_type}s/${product_slug}`,
-      {
-        headers: {
-          authorization: auth,
-        },
-      }
+      `${config.use?.baseURL!}/v1/${product_type}s/${product_slug}`,
+      {}
     );
 
     expect(product_delete.ok()).toBeTruthy();
@@ -110,11 +100,8 @@ export class ProductPage {
     }
 
     const license_mapping = await this.request.post(
-      `${base_url}/v1/projects/${product_slug}/settings/licensing`,
+      `${config.use?.baseURL!}/v1/projects/${product_slug}/settings/licensing`,
       {
-        headers: {
-          authorization: auth,
-        },
         data: {
           hosted_at: license[0],
           license_source: "Native",
@@ -131,11 +118,8 @@ export class ProductPage {
 
   async single_variation_single_payment(product_slug, limit, price) {
     const single_variation_single_payment = await this.request.post(
-      `${base_url}/v1/projects/${product_slug}/settings/variations`,
+      `${config.use?.baseURL!}/v1/projects/${product_slug}/settings/variations`,
       {
-        headers: {
-          authorization: auth,
-        },
         data: {
           default_variation: {
             activation_limit: limit,
@@ -157,11 +141,8 @@ export class ProductPage {
     objFilelocation[slug] = {};
 
     const release_create = await this.request.post(
-      `${base_url}/v1/${product_type}s/${product_slug}/releases`,
+      `${config.use?.baseURL!}/v1/${product_type}s/${product_slug}/releases`,
       {
-        headers: {
-          authorization: auth,
-        },
         data: {
           change_log: `Initial Release for ${product_slug}`,
           // file_location: objFilelocation,

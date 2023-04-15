@@ -1,7 +1,6 @@
 import { faker } from "@faker-js/faker";
 import { APIRequestContext, expect } from "@playwright/test";
-import { auth } from "../tests/main.spec";
-import { base_url } from "../utils/data";
+import config from "../playwright.config";
 
 export class ThemePage {
   readonly request: APIRequestContext;
@@ -11,11 +10,10 @@ export class ThemePage {
   }
 
   async theme_list() {
-    const theme_list = await this.request.get(`${base_url}/v1/themes`, {
-      headers: {
-        authorization: auth,
-      },
-    });
+    const theme_list = await this.request.get(
+      `${config.use?.baseURL!}/v1/themes`,
+      {}
+    );
 
     expect(theme_list.ok()).toBeTruthy();
 
@@ -25,11 +23,8 @@ export class ThemePage {
 
   async free_theme_create(theme_name) {
     const free_theme_create = await this.request.post(
-      `${base_url}/v1/onboarding/basic-information/`,
+      `${config.use?.baseURL!}/v1/onboarding/basic-information/`,
       {
-        headers: {
-          authorization: auth,
-        },
         data: {
           name: theme_name,
           slug: theme_name.split(" ").join("_").toLowerCase(),
@@ -48,11 +43,8 @@ export class ThemePage {
 
   async pro_theme_create(theme_name) {
     const pro_theme_create = await this.request.post(
-      `${base_url}/v1/onboarding/basic-information/`,
+      `${config.use?.baseURL!}/v1/onboarding/basic-information/`,
       {
-        headers: {
-          authorization: auth,
-        },
         data: {
           name: theme_name,
           slug: theme_name.split(" ").join("_").toLowerCase(),
@@ -72,11 +64,8 @@ export class ThemePage {
 
   async theme_update(theme_slug, new_theme_name) {
     const theme_update = await this.request.put(
-      `${base_url}/v1/themes/${theme_slug}`,
+      `${config.use?.baseURL!}/v1/themes/${theme_slug}`,
       {
-        headers: {
-          authorization: auth,
-        },
         data: {
           demo: null,
           description: null,

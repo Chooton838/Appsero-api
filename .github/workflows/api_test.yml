@@ -33,7 +33,7 @@ jobs:
           npm install allure-commandline
 
       - name: Run Playwright tests on Production
-        run: STAGING=0 npx playwright test -g "Login"
+        run: STAGING=0 npx playwright test
 
       - name: Get Allure history
         uses: actions/checkout@v3
@@ -62,6 +62,7 @@ jobs:
           PUBLISH_DIR: allure-history
 
       - name: Allure Report Link
+        if: always()
         run: echo https://chooton838.github.io/Appsero-api/${{ github.run_number }}
 
       - name: Publish Test Report
@@ -83,8 +84,7 @@ jobs:
           retention-days: 30
 
       - name: Send Test Report on email
-        # if: failure()
-        if: always()
+        if: failure()
         uses: dawidd6/action-send-mail@v3
         with:
           # mail server settings
@@ -98,7 +98,7 @@ jobs:
           # email subject
           subject: ${{ github.job }} job of ${{ github.repository }} has ${{ job.status }}
           # email body as text
-          body: ${{ github.job }} job in worflow ${{ github.workflow }} of ${{ github.repository }} has ${{ job.status }}. Allure Report Link":" https://chooton838.github.io/Appsero-api/${{ github.run_number }}
+          body: ${{ github.job }} job in worflow ${{ github.workflow }} of ${{ github.repository }} has ${{ job.status }}. Report Link ~ https://chooton838.github.io/Appsero-api/${{ github.run_number }}
           # comma-separated string, send email to
           to: choton838@gmail.com
           # from email name
@@ -121,7 +121,7 @@ jobs:
           npm install allure-commandline
 
       - name: Run Playwright tests on Staging
-        run: STAGING=1 npx playwright test --grep @gitactiontest
+        run: STAGING=1 npx playwright test
 
       - name: Get Allure history
         uses: actions/checkout@v3
@@ -172,8 +172,7 @@ jobs:
           retention-days: 30
 
       - name: Send Test Report on email
-        # if: failure()
-        if: always()
+        if: failure()
         uses: dawidd6/action-send-mail@v3
         with:
           # mail server settings
@@ -187,7 +186,7 @@ jobs:
           # email subject
           subject: ${{ github.job }} job of ${{ github.repository }} has ${{ job.status }}
           # email body as text
-          body: ${{ github.job }} job in worflow ${{ github.workflow }} of ${{ github.repository }} has ${{ job.status }}. Allure Report Link":" https://chooton838.github.io/Appsero-api/${{ github.run_number }}
+          body: ${{ github.job }} job in worflow ${{ github.workflow }} of ${{ github.repository }} has ${{ job.status }}. Report Link ~ https://chooton838.github.io/Appsero-api/${{ github.run_number }}
           # comma-separated string, send email to
           to: choton838@gmail.com
           # from email name
