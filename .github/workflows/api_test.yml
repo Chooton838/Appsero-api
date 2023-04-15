@@ -68,7 +68,7 @@ jobs:
         uses: mikepenz/action-junit-report@v3
         if: always() # always run even if the previous step fails
         with:
-          report_paths: "tests/api/playwright-report/results.xml"
+          report_paths: "playwright-report/results.xml"
           include_passed: true,
           check_retries: true,
           detailed_summary: true,
@@ -81,6 +81,29 @@ jobs:
           path: playwright-report/
           if-no-files-found: ignore
           retention-days: 30
+
+      - name: Send Test Report on email
+        # if: failure()
+        if: always()
+        uses: dawidd6/action-send-mail@v2
+        with:
+          # mail server settings
+          server_address: smtp.gmail.com
+          server_port: 465
+          # user credentials
+          # username: ${{ secrets.EMAIL_USERNAME }}
+          # password: ${{ secrets.EMAIL_PASSWORD }}
+          username: "chooton@wedevs.com"
+          password: "Ca-2205."
+          # email subject
+          subject: ${{ github.job }} job of ${{ github.repository }} has ${{ job.status }}
+          # email body as text
+          body: ${{ github.job }} job in worflow ${{ github.workflow }} of ${{ github.repository }} has ${{ job.status }}. Allure Report Link":" https://chooton838.github.io/Appsero-api/${{ github.run_number }}
+          # comma-separated string, send email to
+          to: choton838@gmail.com
+          # from email name
+          from: Appsero API Automation Test
+          attachments: ./playwright-report/index.html
 
   staging_test:
     if: github.ref_name == 'develop'
@@ -97,7 +120,7 @@ jobs:
           npm ci
           npm install allure-commandline
 
-      - name: Run Playwright tests on Production
+      - name: Run Playwright tests on Staging
         run: STAGING=1 npx playwright test -g "Login"
 
       - name: Get Allure history
@@ -133,7 +156,7 @@ jobs:
         uses: mikepenz/action-junit-report@v3
         if: always() # always run even if the previous step fails
         with:
-          report_paths: "tests/api/playwright-report/results.xml"
+          report_paths: "playwright-report/results.xml"
           include_passed: true,
           check_retries: true,
           detailed_summary: true,
@@ -146,3 +169,26 @@ jobs:
           path: playwright-report/
           if-no-files-found: ignore
           retention-days: 30
+
+      - name: Send Test Report on email
+        # if: failure()
+        if: always()
+        uses: dawidd6/action-send-mail@v2
+        with:
+          # mail server settings
+          server_address: smtp.gmail.com
+          server_port: 465
+          # user credentials
+          # username: ${{ secrets.EMAIL_USERNAME }}
+          # password: ${{ secrets.EMAIL_PASSWORD }}
+          username: "chooton@wedevs.com"
+          password: "Ca-2205."
+          # email subject
+          subject: ${{ github.job }} job of ${{ github.repository }} has ${{ job.status }}
+          # email body as text
+          body: ${{ github.job }} job in worflow ${{ github.workflow }} of ${{ github.repository }} has ${{ job.status }}. Allure Report Link":" https://chooton838.github.io/Appsero-api/${{ github.run_number }}
+          # comma-separated string, send email to
+          to: choton838@gmail.com
+          # from email name
+          from: Appsero API Automation Test
+          attachments: ./playwright-report/index.html
