@@ -1,7 +1,6 @@
 import { APIRequestContext, expect } from "@playwright/test";
 import * as fs from "fs";
-import { auth } from "../tests/main.spec";
-import { base_url } from "../utils/data";
+import config from "../playwright.config";
 
 export class DashboardPage {
   readonly request: APIRequestContext;
@@ -11,16 +10,16 @@ export class DashboardPage {
   }
 
   async overview_details() {
-    const overview_details = await this.request.get(`${base_url}/v1/overview`, {
-      headers: {
-        authorization: auth,
-      },
-      data: {
-        start_date: "2022-12-01",
-        end_date: "2022-12-31",
-        comparing_to: "month",
-      },
-    });
+    const overview_details = await this.request.get(
+      `${config.use?.baseURL!}/v1/overview`,
+      {
+        data: {
+          start_date: "2022-12-01",
+          end_date: "2022-12-31",
+          comparing_to: "month",
+        },
+      }
+    );
 
     expect(overview_details.status()).toBeTruthy();
 

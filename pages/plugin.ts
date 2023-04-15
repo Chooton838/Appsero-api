@@ -1,6 +1,6 @@
 import { APIRequestContext, expect } from "@playwright/test";
-import { auth } from "../tests/main.spec";
-import { base_url, plugin_data } from "../utils/data";
+import config from "../playwright.config";
+import { plugin_data } from "../utils/data";
 
 export class PluginPage {
   readonly request: APIRequestContext;
@@ -10,11 +10,10 @@ export class PluginPage {
   }
 
   async plugin_list() {
-    const plugin_list = await this.request.get(`${base_url}/v1/plugins`, {
-      headers: {
-        authorization: auth,
-      },
-    });
+    const plugin_list = await this.request.get(
+      `${config.use?.baseURL!}/v1/plugins`,
+      {}
+    );
 
     expect(plugin_list.ok()).toBeTruthy();
 
@@ -24,11 +23,8 @@ export class PluginPage {
 
   async free_plugin_create(plugin_name) {
     const free_plugin_create = await this.request.post(
-      `${base_url}/v1/onboarding/basic-information/`,
+      `${config.use?.baseURL!}/v1/onboarding/basic-information/`,
       {
-        headers: {
-          authorization: auth,
-        },
         data: {
           name: plugin_name,
           slug: plugin_name.split(" ").join("_").toLowerCase(),
@@ -36,7 +32,6 @@ export class PluginPage {
           php: plugin_data.php_version,
           requires: plugin_data.wp_version,
           tested: plugin_data.tested_upto_version,
-          //'variation_ids':,
           type: "plugin",
           icon_file: null,
         },
@@ -50,11 +45,8 @@ export class PluginPage {
 
   async pro_plugin_create(plugin_name) {
     const pro_plugin_create = await this.request.post(
-      `${base_url}/v1/onboarding/basic-information/`,
+      `${config.use?.baseURL!}/v1/onboarding/basic-information/`,
       {
-        headers: {
-          authorization: auth,
-        },
         data: {
           name: plugin_name,
           slug: plugin_name.split(" ").join("_").toLowerCase(),
@@ -77,11 +69,8 @@ export class PluginPage {
 
   async plugin_update(plugin_slug) {
     const plugin_update = await this.request.put(
-      `${base_url}/v1/plugins/${plugin_slug}`,
+      `${config.use?.baseURL!}/v1/plugins/${plugin_slug}`,
       {
-        headers: {
-          authorization: auth,
-        },
         data: {
           demo: null,
           description: null,
