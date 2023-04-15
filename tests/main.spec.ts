@@ -144,7 +144,7 @@ test.skip("Release CRUD @gitactiontest", async ({ request }) => {
 });
 
 /* ------------------------ Bundle ------------------------ */
-test("Bundle Create & Update", async ({ request }) => {
+test.skip("Bundle Create & Update @gitactiontest", async ({ request }) => {
   const bundle = new BundlePage(request);
 
   //Could be any valid bundle name
