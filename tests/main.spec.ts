@@ -16,7 +16,7 @@ const themes_slug: string[] = [];
 export let auth: string = "";
 
 /* ------------------------ Login ------------------------ */
-test("Login @gitactiontest", async ({ request }) => {
+test.only("Login @gitactiontest", async ({ request }) => {
   const login_data: Array<string> = [
     config.use?.baseURL!,
     config.use?.httpCredentials?.username!,
@@ -36,21 +36,23 @@ test("Getting Dashboard Overview Details @gitactiontest", async ({
 });
 
 /* ------------------------ Plugin ------------------------ */
-test("Plugin List, Create & Update @gitactiontest", async ({ request }) => {
+test.only("Plugin List, Create & Update @gitactiontest", async ({
+  request,
+}) => {
   const plugin = new PluginPage(request);
 
   // Plugin List
   // await plugin.plugin_list();
 
-  // const free_plugin_name: string = faker.lorem.words(2); //Auto generated plugin name
-  // const pro_plugin_name: string = faker.lorem.words(2); //Auto generated plugin name
+  const free_plugin_name: string = faker.lorem.words(2); //Auto generated plugin name
+  const pro_plugin_name: string = faker.lorem.words(2); //Auto generated plugin name
   //const platform_name: string = "woocom";
 
   // Free Plugin Create
-  plugins_slug.push(await plugin.free_plugin_create("free_plugin"));
+  plugins_slug.push(await plugin.free_plugin_create(free_plugin_name));
 
   // Pro Plugin Create
-  plugins_slug.push(await plugin.pro_plugin_create("woocom_plugin"));
+  plugins_slug.push(await plugin.pro_plugin_create(pro_plugin_name));
 
   // Plugin Update
   const updateable_plugin_slug: string = ""; //Any existing plugin slug
@@ -67,7 +69,7 @@ test("Plugin List, Create & Update @gitactiontest", async ({ request }) => {
 });
 
 /* ------------------------ Theme ------------------------ */
-test("Theme List, Create & Update", async ({ request }) => {
+test.only("Theme List, Create & Update @gitactiontest", async ({ request }) => {
   const theme = new ThemePage(request);
 
   // Theme List
@@ -101,7 +103,7 @@ test("Theme List, Create & Update", async ({ request }) => {
 let products_id: string[] = [];
 
 /* ---- Products ID ---- */
-test("Products id", async ({ request }) => {
+test.only("Products id @gitactiontest", async ({ request }) => {
   const product = new ProductPage(request);
 
   const products_slug = plugins_slug.concat(themes_slug);
