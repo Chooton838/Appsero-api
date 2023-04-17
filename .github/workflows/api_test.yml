@@ -172,7 +172,6 @@ jobs:
           retention-days: 30
 
       - name: Send Test Report on email
-        # if: failure()
         if: always()
         uses: dawidd6/action-send-mail@v3
         with:
@@ -180,10 +179,10 @@ jobs:
           server_address: smtp.gmail.com
           server_port: 465
           # user credentials
-          # username: ${{ secrets.EMAIL_USERNAME }}
-          # password: ${{ secrets.EMAIL_PASSWORD }}
-          username: "qa.wedevs@gmail.com"
-          password: "weDevs@QA.2023"
+          username: ${{ secrets.EMAIL_USERNAME }}
+          password: ${{ secrets.EMAIL_PASSWORD }}
+          # username: "chooton@wedevs.com"
+          # password: "Ca-2205."
           # email subject
           subject: ${{ github.job }} job of ${{ github.repository }} has ${{ job.status }}
           # email body as text
