@@ -172,7 +172,8 @@ jobs:
           retention-days: 30
 
       - name: Send Test Report on email
-        if: failure()
+        # if: failure()
+        if: always()
         uses: dawidd6/action-send-mail@v3
         with:
           # mail server settings
