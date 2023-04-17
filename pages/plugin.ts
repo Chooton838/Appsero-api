@@ -48,7 +48,6 @@ export class PluginPage {
     );
 
     expect(free_plugin_create.ok()).toBeTruthy();
-
     return plugin_name.split(" ").join("_").toLowerCase();
   }
 
@@ -72,7 +71,6 @@ export class PluginPage {
     );
 
     expect(pro_plugin_create.ok()).toBeTruthy();
-
     return plugin_name.split(" ").join("_").toLowerCase();
   }
 
@@ -82,10 +80,10 @@ export class PluginPage {
       {
         data: {
           demo: null,
-          description: null,
+          description: "Plugin Updated",
           homepage: null,
           name: plugin_data.plugin_name,
-          slug: plugin_data.plugin_name.split(" ").join("_").toLowerCase(),
+          slug: plugin_slug,
           variation_ids: [],
           version: plugin_data.plugin_version,
           php: plugin_data.php_version,
@@ -96,7 +94,6 @@ export class PluginPage {
     );
 
     expect(plugin_update.ok()).toBeTruthy();
-
     const plugin_update_response = await plugin_update.json();
     // console.log(plugin_update_response);
   }

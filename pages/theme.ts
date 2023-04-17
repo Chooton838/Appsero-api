@@ -1,4 +1,3 @@
-import { faker } from "@faker-js/faker";
 import { APIRequestContext, expect } from "@playwright/test";
 import config from "../playwright.config";
 
@@ -16,7 +15,6 @@ export class ThemePage {
     );
 
     expect(theme_list.ok()).toBeTruthy();
-
     const theme_list_response = await theme_list.json();
     // console.log(theme_list_response);
   }
@@ -28,7 +26,7 @@ export class ThemePage {
         data: {
           name: theme_name,
           slug: theme_name.split(" ").join("_").toLowerCase(),
-          version: faker.finance.amount(0, 9, 1),
+          version: "1.1.1",
           //'variation_ids':,
           type: "theme",
           icon_file: null,
@@ -37,7 +35,6 @@ export class ThemePage {
     );
 
     expect(free_theme_create.ok()).toBeTruthy();
-
     return theme_name.split(" ").join("_").toLowerCase();
   }
 
@@ -48,7 +45,7 @@ export class ThemePage {
         data: {
           name: theme_name,
           slug: theme_name.split(" ").join("_").toLowerCase(),
-          version: faker.finance.amount(0, 9, 1),
+          version: "1.1.1",
           //'variation_ids':,
           type: "theme",
           icon_file: null,
@@ -58,28 +55,26 @@ export class ThemePage {
     );
 
     expect(pro_theme_create.ok()).toBeTruthy();
-
     return theme_name.split(" ").join("_").toLowerCase();
   }
 
-  async theme_update(theme_slug, new_theme_name) {
+  async theme_update(theme_slug) {
     const theme_update = await this.request.put(
       `${config.use?.baseURL!}/v1/themes/${theme_slug}`,
       {
         data: {
           demo: null,
-          description: null,
+          description: "Theme Updated",
           homepage: null,
-          name: new_theme_name,
-          slug: new_theme_name.split(" ").join("_").toLowerCase(),
+          name: theme_slug,
+          slug: theme_slug,
           variation_ids: [],
+          version: "1.1.1",
         },
       }
     );
 
     expect(theme_update.ok()).toBeTruthy();
-
     const theme_update_response = await theme_update.json();
-    // console.log(theme_update_response);
   }
 }

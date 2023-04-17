@@ -48,61 +48,51 @@ test("Premium Plugin Create", async ({ request }) => {
   plugins_slug.push(await plugin.pro_plugin_create(pro_plugin_name));
 });
 
-test.skip("Plugin List, Create & Update", async ({ request }) => {
+test("Plugin Update", async ({ request }) => {
   const plugin = new PluginPage(request);
-
-  // Plugin Update
-  const updateable_plugin_slug: string = ""; //Any existing plugin slug
-  // await plugin.plugin_update(updateable_plugin_slug);
+  // const updateable_plugin_slug: string = ""; //Any existing plugin slug
+  // await plugin.plugin_update(plugins_slug[0]);
 
   /* All Plugin Update */
-  // for (let i: number = 0; i < plugins_slug.length; i++) {
-  //     await plugin.plugin_update(plugins_slug[i]);
-  // }
-  /* All Plugin Update */
-  // for (let i: number = 0; i < plugins_slug.length; i++) {
-  //     await plugin.plugin_update(plugins_slug[i]);
-  // }
+  for (let i: number = 0; i < plugins_slug.length; i++) {
+    await plugin.plugin_update(plugins_slug[i]);
+  }
 });
 
-/* ------------------------ Theme ------------------------ */
-test("Theme List, Create & Update", async ({ request }) => {
+/* ------------------------ Theme CRUD Functionalities ------------------------ */
+test("Get all the Themes List", async ({ request }) => {
   const theme = new ThemePage(request);
-
-  // Theme List
   await theme.theme_list();
+});
 
+test("Free Theme Create", async ({ request }) => {
+  const theme = new ThemePage(request);
   const free_theme_name: string = faker.lorem.words(2); //Auto generated theme name
+  themes_slug.push(await theme.free_theme_create(free_theme_name));
+});
+
+test("Premium Theme Create", async ({ request }) => {
+  const theme = new ThemePage(request);
   const pro_theme_name: string = faker.lorem.words(2); //Auto generated theme name
+  themes_slug.push(await theme.pro_theme_create(pro_theme_name));
+});
 
-  const website_url: string = "https://modernsound.s3-tastewp.com"; //Website URL through which this theme will be sold
-  const product_name: string = "Test Product N2"; //Product Name which will be connected with this theme
-  const platform_name: string = "edd";
-
-  // Free Theme Create
-  themes_slug.push(await theme.free_theme_create("free_theme"));
-
-  // Pro Theme Create
-  themes_slug.push(await theme.pro_theme_create("edd_theme"));
-
-  // Theme Update
-  const updateable_theme_slug: string = ""; //Any existing theme slug
-  const new_theme_name: string = "";
-
-  // await theme.theme_update(updateable_theme_slug, new_theme_name);
+test("Theme Update", async ({ request }) => {
+  const theme = new ThemePage(request);
+  // const updateable_theme_slug: string = ""; //Any existing theme slug
+  // await theme.theme_update(updateable_theme_slug);
 
   /* All Theme Update */
-  // for (let i: number = 0; i < themes_slug.length; i++) {
-  //     await theme.theme_update(themes_slug[i], faker.lorem.words(2));
-  // }
+  for (let i: number = 0; i < themes_slug.length; i++) {
+    await theme.theme_update(themes_slug[i]);
+  }
 });
 
 let products_id: string[] = [];
 
-/* ---- Products ID ---- */
+/* ------------------------ Products ID ------------------------ */
 test("Products id", async ({ request }) => {
   const product = new ProductPage(request);
-
   const products_slug = plugins_slug.concat(themes_slug);
 
   products_id.push(
@@ -111,8 +101,8 @@ test("Products id", async ({ request }) => {
   );
 });
 
-/* ------------------------ Release CRUD ------------------------ */
-test("Release CRUD", async ({ request }) => {
+/* ------------------------ Release CRUD Functionalities ------------------------ */
+test("Release Create", async ({ request }) => {
   const product = new ProductPage(request);
   const releaseable_products_list = await product.product_list();
 
@@ -153,7 +143,7 @@ test("Bundle Create & Update", async ({ request }) => {
   const bundle_products: string[] = [];
   const platform_name: string = "edd";
 
-  await bundle.bundle_create("fastspring_bundle", products_id);
+  await bundle.bundle_create(bundle_name, products_id);
 
   /* -------- Bundle Update -------- */
   /**
