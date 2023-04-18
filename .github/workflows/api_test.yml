@@ -161,7 +161,7 @@ jobs:
           include_passed: true,
           check_retries: true,
           detailed_summary: true,
-          summary: https://chooton838.github.io/Appsero-api/${{ github.run_number }} ~ ${{steps.{CHANGELOG_STEP_ID}.outputs.passed}}
+          summary: https://chooton838.github.io/Appsero-api/${{ github.run_number }}
 
       - name: Archive playwright artifacts (screenshots, HTML snapshots, Reports)
         uses: actions/upload-artifact@v3
@@ -185,7 +185,7 @@ jobs:
           # email subject
           subject: ${{ github.job }} job of ${{ github.repository }} has ${{ job.status }}
           # email body as text
-          body: ${{ github.job }} job in worflow ${{ github.workflow }} of ${{ github.repository }} has ${{ job.status }}. Report Link ~ https://chooton838.github.io/Appsero-api/${{ github.run_number }} . https://chooton838.github.io/Appsero-api/${{ github.run_number }} ~ ${{steps.{CHANGELOG_STEP_ID}.outputs.passed}}
+          body: ${{ github.job }} job in worflow ${{ github.workflow }} of ${{ github.repository }} has ${{ job.status }}. Report Link ~ https://chooton838.github.io/Appsero-api/${{ github.run_number }} . https://chooton838.github.io/Appsero-api/${{ github.run_number }}
           # comma-separated string, send email to
           to: choton838@gmail.com
           # from email name
