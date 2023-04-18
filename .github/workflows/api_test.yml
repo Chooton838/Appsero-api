@@ -144,7 +144,8 @@ jobs:
         if: always()
         uses: peaceiris/actions-gh-pages@v2
         env:
-          PERSONAL_TOKEN: ${{ secrets.PERSONAL_TOKEN }}
+          # PERSONAL_TOKEN: ${{ secrets.PERSONAL_TOKEN }}
+          github_token: ${{ secrets.GITHUB_TOKEN }}
           PUBLISH_BRANCH: gh-pages
           PUBLISH_DIR: allure-history
 
@@ -160,6 +161,7 @@ jobs:
           include_passed: true,
           check_retries: true,
           detailed_summary: true,
+          summary: https://chooton838.github.io/Appsero-api/${{ github.run_number }} ~ ${{steps.{CHANGELOG_STEP_ID}.outputs.passed}}
 
       - name: Archive playwright artifacts (screenshots, HTML snapshots, Reports)
         uses: actions/upload-artifact@v3
@@ -183,7 +185,7 @@ jobs:
           # email subject
           subject: ${{ github.job }} job of ${{ github.repository }} has ${{ job.status }}
           # email body as text
-          body: ${{ github.job }} job in worflow ${{ github.workflow }} of ${{ github.repository }} has ${{ job.status }}. Report Link ~ https://chooton838.github.io/Appsero-api/${{ github.run_number }}
+          body: ${{ github.job }} job in worflow ${{ github.workflow }} of ${{ github.repository }} has ${{ job.status }}. Report Link ~ https://chooton838.github.io/Appsero-api/${{ github.run_number }} . https://chooton838.github.io/Appsero-api/${{ github.run_number }} ~ ${{steps.{CHANGELOG_STEP_ID}.outputs.passed}}
           # comma-separated string, send email to
           to: choton838@gmail.com
           # from email name
