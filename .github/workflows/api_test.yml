@@ -3,7 +3,7 @@ name: Appsero API Tests
 on:
   workflow_dispatch:
   # schedule:
-  #   - cron: "*/10 * * * *"
+  #   - cron: "* 9 * * *"
   # At the end of every day
   push:
     branches: [develop, master]
@@ -57,7 +57,8 @@ jobs:
         if: always()
         uses: peaceiris/actions-gh-pages@v2
         env:
-          PERSONAL_TOKEN: ${{ secrets.PERSONAL_TOKEN }}
+          # PERSONAL_TOKEN: ${{ secrets.PERSONAL_TOKEN }}
+          github_token: ${{ secrets.GITHUB_TOKEN }}
           PUBLISH_BRANCH: gh-pages
           PUBLISH_DIR: allure-history
 
@@ -91,10 +92,8 @@ jobs:
           server_address: smtp.gmail.com
           server_port: 465
           # user credentials
-          # username: ${{ secrets.EMAIL_USERNAME }}
-          # password: ${{ secrets.EMAIL_PASSWORD }}
-          username: "chooton@wedevs.com"
-          password: "Ca-2205."
+          username: ${{ secrets.EMAIL_USERNAME }}
+          password: ${{ secrets.EMAIL_PASSWORD }}
           # email subject
           subject: ${{ github.job }} job of ${{ github.repository }} has ${{ job.status }}
           # email body as text
@@ -181,8 +180,6 @@ jobs:
           # user credentials
           username: ${{ secrets.EMAIL_USERNAME }}
           password: ${{ secrets.EMAIL_PASSWORD }}
-          # username: "chooton@wedevs.com"
-          # password: "Ca-2205."
           # email subject
           subject: ${{ github.job }} job of ${{ github.repository }} has ${{ job.status }}
           # email body as text
