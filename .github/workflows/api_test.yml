@@ -2,8 +2,8 @@ name: Appsero API Tests
 
 on:
   workflow_dispatch:
-  schedule:
-    - cron: "0 3 * * *"
+  # schedule:
+  #   - cron: "0 3 * * *"
   # At the 09:00 AM of every day in BD and 03:00 AM in UTC
   push:
     branches: [develop, master]
@@ -172,7 +172,7 @@ jobs:
           retention-days: 30
 
       - name: Send Test Report on email
-        if: always()
+        if: failure()
         uses: dawidd6/action-send-mail@v3
         with:
           # mail server settings
