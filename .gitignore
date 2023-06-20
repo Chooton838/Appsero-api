@@ -2,8 +2,10 @@ node_modules/
 /test-results/
 /playwright-report/
 /playwright/.cache/
-.env
+/allure-results
 overview stats.json
+plugins_list.json
+themes_list.json
+.env
 .vscode
 .DS_Store
-.eslintrc.json

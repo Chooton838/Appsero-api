@@ -61,6 +61,7 @@ jobs:
         if: always()
         uses: peaceiris/actions-gh-pages@v2
         env:
+          # PERSONAL_TOKEN: ${{ secrets.PERSONAL_TOKEN }}
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           PUBLISH_BRANCH: gh-pages
           PUBLISH_DIR: allure-history
@@ -102,10 +103,7 @@ jobs:
           # email subject
           subject: ${{ github.job }} job of ${{ github.repository }} has ${{ job.status }}
           # email body as text
-          body:
-            ${{ github.job }} job in worflow ${{ github.workflow }} of ${{ github.repository }} has ${{ job.status }}.
-            Allure Report Link ~ https://chooton838.github.io/Appsero-api/${{ github.run_number }}.
-            This test is conducted on Appsero Production server. The attached index.html file will give the details report.
+          body: ${{ github.job }} job in worflow ${{ github.workflow }} of ${{ github.repository }} has ${{ job.status }}. This test is conducted on Appsero Production server. The attached index.html file will give the details report. And Allure Report Link ~ https://chooton838.github.io/Appsero-api/${{ github.run_number }}
           # comma-separated string, send email to
           to: choton838@gmail.com
           # from email name
@@ -157,6 +155,7 @@ jobs:
         if: always()
         uses: peaceiris/actions-gh-pages@v2
         env:
+          # PERSONAL_TOKEN: ${{ secrets.PERSONAL_TOKEN }}
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           PUBLISH_BRANCH: gh-pages
           PUBLISH_DIR: allure-history
@@ -198,10 +197,7 @@ jobs:
           # email subject
           subject: ${{ github.job }} job of ${{ github.repository }} has ${{ job.status }}
           # email body as text
-          body:
-            ${{ github.job }} job in worflow ${{ github.workflow }} of ${{ github.repository }} has ${{ job.status }}.
-            Allure Report Link ~ https://chooton838.github.io/Appsero-api/${{ github.run_number }}.
-            This test is conducted on Appsero Staging server. The attached index.html file will give the details report.
+          body: ${{ github.job }} job in worflow ${{ github.workflow }} of ${{ github.repository }} has ${{ job.status }}. This test is conducted on Appsero Staging server. The attached index.html file will give the details report. And Allure Report Link ~ https://chooton838.github.io/Appsero-api/${{ github.run_number }}
           # comma-separated string, send email to
           to: choton838@gmail.com
           # from email name
